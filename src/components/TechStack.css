@@ -1,0 +1,25 @@
+.tech-industries-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tech-stack-card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+}
+
+@media (max-width: 768px) {
+  .tech-industries-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-stack-card {
+    padding: 24px;
+    gap: 24px;
+  }
+}

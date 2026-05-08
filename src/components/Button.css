@@ -1,0 +1,62 @@
+.custom-btn {
+  position: relative;
+  border-radius: 9999px;
+  padding: 0.6px;
+  background-color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.custom-btn:active {
+  transform: scale(0.98);
+}
+
+.custom-btn-navbar {
+  background-color: var(--text-color);
+}
+
+.custom-btn-cta {
+  background-color: var(--text-color);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 11px 29px;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+  font-family: inherit;
+}
+
+/* Navbar variant */
+.custom-btn-navbar .btn-content {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* CTA variant */
+.custom-btn-cta .btn-content {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, var(--accent-color) 0%, transparent 70%);
+  filter: blur(2px);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.5;
+}

@@ -1,0 +1,118 @@
+.hero-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 280px; /* Default desktop padding */
+  padding-bottom: 102px;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 40px;
+  text-align: center;
+  box-sizing: border-box;
+  margin-top: -85px; /* Offset to visually center in remaining space after navbar */
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--label-bg);
+  border: 1px solid var(--label-border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  gap: 6px;
+  transition: all 0.5s ease;
+}
+
+.badge-dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  margin-right: 2px;
+}
+
+.badge-text-dim {
+  color: var(--subheading-color);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.badge-text-solid {
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.hero-heading {
+  max-width: 800px;
+  font-size: 72px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0;
+  background: linear-gradient(144.5deg, var(--gradient-start) 28%, var(--gradient-end) 115%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--text-color);
+  letter-spacing: -0.04em;
+}
+
+.hero-subtitle {
+  max-width: 680px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--subheading-color);
+  line-height: 1.5;
+  margin: 0;
+  margin-top: -16px; 
+}
+
+.hero-cta-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .hero-heading {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-main-content {
+    padding-top: 160px;
+    margin-top: 0;
+  }
+  
+  .hero-heading {
+    font-size: 42px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .hero-cta-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-main-content {
+    padding-top: 140px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .hero-heading {
+    font-size: 32px;
+  }
+}
