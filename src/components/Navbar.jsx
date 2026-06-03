@@ -38,9 +38,9 @@ const Navbar = ({ theme, toggleTheme }) => {
         </div>
       </div>
       <div className="navbar-right">
-        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
+        <div className={`theme-switch ${theme}`} onClick={toggleTheme} aria-label="Toggle Theme">
+          <div className="theme-switch-handle"></div>
+        </div>
         <div className="cta-hide-mobile">
           <Button variant="navbar" href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Book a Consultation</Button>
         </div>

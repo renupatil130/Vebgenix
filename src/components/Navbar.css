@@ -83,25 +83,34 @@
   gap: 24px;
 }
 
-.theme-toggle {
-  background: var(--label-bg);
-  border: 1px solid var(--label-border);
-  color: var(--text-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.theme-switch {
+  width: 50px;
+  height: 26px;
+  background-color: var(--label-border);
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  padding: 0 3px;
+  box-sizing: border-box;
 }
 
-.theme-toggle:hover {
-  background: var(--label-border);
-  transform: scale(1.1);
+.theme-switch.light {
+  background-color: #ccc;
+}
+
+.theme-switch-handle {
+  width: 20px;
+  height: 20px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.theme-switch.dark .theme-switch-handle {
+  transform: translateX(24px);
 }
 
 .chevron-icon {

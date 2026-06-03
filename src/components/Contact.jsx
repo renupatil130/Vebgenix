@@ -5,10 +5,34 @@ import './Contact.css';
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    
+    // We add a subject line automatically
+    formProps._subject = `New Project Enquiry from ${formProps.name}`;
+    try {
+      const response = await fetch("http://localhost:3001/api/contact", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(formProps)
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+        e.target.reset(); // Clear the form
+      } else {
+        alert("Failed to send enquiry. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -56,20 +80,20 @@ const Contact = () => {
                 <div className="contact-input-group">
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', fontSize: '13px', color: 'var(--subheading-color)', marginBottom: '12px' }}>Name *</label>
-                    <input required type="text" placeholder="Your full name" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
+                    <input required name="name" type="text" placeholder="Your full name" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
                   </div>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', fontSize: '13px', color: 'var(--subheading-color)', marginBottom: '12px' }}>Email *</label>
-                    <input required type="email" placeholder="your@email.com" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
+                    <input required name="email" type="email" placeholder="your@email.com" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
                   </div>
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', color: 'var(--subheading-color)', marginBottom: '12px' }}>Company</label>
-                  <input type="text" placeholder="Company or organisation" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
+                  <input type="text" name="company" placeholder="Company or organisation" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', color: 'var(--subheading-color)', marginBottom: '12px' }}>Project Type</label>
-                  <select style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', appearance: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'}>
+                  <select name="type" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', appearance: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'}>
                     <option value="">Select a service</option>
                     <option value="web">Custom Web Development</option>
                     <option value="erp">ERP & Business Systems</option>
@@ -77,7 +101,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', color: 'var(--subheading-color)', marginBottom: '12px' }}>Tell us about your project *</label>
-                  <textarea required placeholder="Describe what you need built, current challenges, and any relevant details..." rows="5" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', resize: 'vertical', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'}></textarea>
+                  <textarea required name="details" placeholder="Describe what you need built, current challenges, and any relevant details..." rows="5" style={{ width: '100%', padding: '16px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--label-border)', borderRadius: '12px', color: 'var(--text-color)', fontSize: '15px', outline: 'none', resize: 'vertical', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--text-color)'} onBlur={(e) => e.target.style.borderColor = 'var(--label-border)'}></textarea>
                 </div>
                 <div style={{ marginTop: '24px' }}>
                   <Button variant="cta" type="submit">Send Enquiry</Button>
