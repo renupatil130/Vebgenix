@@ -9,19 +9,19 @@ const Contact = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
-    
+
     // We add a subject line automatically
     formProps._subject = `New Project Enquiry from ${formProps.name}`;
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("http://localhost:3001/api/contact", {
         method: "POST",
-        headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(formProps)
       });
-      
+
       if (response.ok) {
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 5000);
@@ -40,9 +40,9 @@ const Contact = () => {
       <div className="glass-card grid-2 contact-grid">
         <div>
           <span className="label-text reveal">Start Your Project</span>
-          <h2 className="section-heading gradient-text reveal delay-1 contact-heading">Let's Build<br/>Something Real.</h2>
+          <h2 className="section-heading gradient-text reveal delay-1 contact-heading">Let's Build<br />Something Real.</h2>
           <p className="section-subheading reveal delay-2">Tell us about your business and what you need to build. We will respond with a scoping call invitation within one business day.</p>
-          
+
           <div className="contact-info-item">
             <div>
               <span className="contact-info-title">Email</span>
@@ -64,7 +64,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="contact-form-container">
           {submitted ? (
             <div className="reveal active" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '24px' }}>
