@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vebgenix.com/sitemap.xml
+Sitemap: https://www.vebgenix.com/sitemap.xml
